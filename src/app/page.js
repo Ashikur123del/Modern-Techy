@@ -1,9 +1,12 @@
-import Image from "next/image";
+import Banner from "@/components/Bannar";
+import TilesCards from "@/components/TilesCards";
+
 
 export default function Home() {
   return (
    <div>
-        Hello Home
+        <Banner />
+        <TilesCards />
    </div>
   );
 }

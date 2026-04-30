@@ -1,2 +1,21 @@
 @import "tailwindcss";
 @import "@heroui/styles"; 
+
+
+ .swiper-button-next, .swiper-button-prev {
+          color: white !important;
+          background: rgba(255, 255, 255, 0.1);
+          width: 50px !important;
+          height: 50px !important;
+          border-radius: 50%;
+          backdrop-filter: blur(4px);
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+          font-size: 20px !important;
+          font-weight: bold;
+        }
+        .swiper-pagination-bullet-active {
+          background: #2563eb !important;
+          width: 25px !important;
+          border-radius: 5px !important;
+        }
