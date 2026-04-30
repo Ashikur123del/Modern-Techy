@@ -1,0 +1,122 @@
+[
+  {
+    "id": "tile_001",
+    "title": "Ceramic Blue Tile",
+    "description": "Premium ceramic tile with blue glaze finish, perfect for modern bathrooms.",
+    "image": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a",
+    "category": "Ceramic",
+    "price": 45.99,
+    "currency": "USD",
+    "dimensions": "60x60 cm",
+    "material": "Ceramic",
+    "inStock": true
+  },
+  {
+    "id": "tile_002",
+    "title": "Royal Carrara Marble",
+    "description": "Luxurious white marble with grey veins, ideal for elegant living room floors.",
+    "image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d",
+    "category": "Marble",
+    "price": 89.50,
+    "currency": "USD",
+    "dimensions": "80x80 cm",
+    "material": "Natural Marble",
+    "inStock": true
+  },
+  {
+    "id": "tile_003",
+    "title": "Rustic Terra Cotta",
+    "description": "Warm earth-toned tiles that bring a Mediterranean vibe to your patio.",
+    "image": "https://images.unsplash.com/photo-1516514172895-3e218206d917",
+    "category": "Terracotta",
+    "price": 32.25,
+    "currency": "USD",
+    "dimensions": "30x30 cm",
+    "material": "Clay",
+    "inStock": true
+  },
+  {
+    "id": "tile_004",
+    "title": "Emerald Glossy Brick",
+    "description": "Deep green glossy subway tiles for a sophisticated kitchen backsplash.",
+    "image": "https://images.unsplash.com/photo-1615529328331-f8917597711f",
+    "category": "Ceramic",
+    "price": 55.00,
+    "currency": "USD",
+    "dimensions": "10x30 cm",
+    "material": "Ceramic",
+    "inStock": true
+  },
+  {
+    "id": "tile_005",
+    "title": "Oak Wood Porcelain",
+    "description": "Porcelain tiles that mimic natural oak wood texture without the maintenance.",
+    "image": "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff",
+    "category": "Porcelain",
+    "price": 62.99,
+    "currency": "USD",
+    "dimensions": "20x120 cm",
+    "material": "Porcelain",
+    "inStock": true
+  },
+  {
+    "id": "tile_006",
+    "title": "Midnight Slate Stone",
+    "description": "Dark, textured slate tiles for a bold and slip-resistant outdoor area.",
+    "image": "https://images.unsplash.com/photo-1523413555809-0fb8a4a2c007",
+    "category": "Natural Stone",
+    "price": 48.75,
+    "currency": "USD",
+    "dimensions": "40x40 cm",
+    "material": "Slate",
+    "inStock": false
+  },
+  {
+    "id": "tile_007",
+    "title": "Moroccan Pattern Tile",
+    "description": "Intricate geometric patterns in blue and white for a vintage aesthetic.",
+    "image": "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7",
+    "category": "Handmade",
+    "price": 75.00,
+    "currency": "USD",
+    "dimensions": "20x20 cm",
+    "material": "Cement",
+    "inStock": true
+  },
+  {
+    "id": "tile_008",
+    "title": "Industrial Concrete Grey",
+    "description": "Minimalist grey tiles with a matte finish for modern loft-style apartments.",
+    "image": "https://images.unsplash.com/photo-1517646458010-ea6bc951662a",
+    "category": "Porcelain",
+    "price": 38.50,
+    "currency": "USD",
+    "dimensions": "60x120 cm",
+    "material": "Porcelain",
+    "inStock": true
+  },
+  {
+    "id": "tile_009",
+    "title": "Golden Vein Quartz",
+    "description": "Engineered quartz with striking golden veins for a premium countertop or wall.",
+    "image": "https://images.unsplash.com/photo-1504198266315-05562149e97c",
+    "category": "Quartz",
+    "price": 120.00,
+    "currency": "USD",
+    "dimensions": "60x60 cm",
+    "material": "Engineered Stone",
+    "inStock": true
+  },
+  {
+    "id": "tile_010",
+    "title": "Hexagon Matte Black",
+    "description": "Trendy hexagon-shaped tiles in matte black for a contemporary shower floor.",
+    "image": "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b",
+    "category": "Ceramic",
+    "price": 50.40,
+    "currency": "USD",
+    "dimensions": "25x25 cm",
+    "material": "Ceramic",
+    "inStock": true
+  }
+]
