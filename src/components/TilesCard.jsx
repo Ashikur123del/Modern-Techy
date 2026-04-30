@@ -1,84 +1,92 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { FiArrowRight, FiMaximize, FiLayers } from "react-icons/fi";
+import Link from "next/link";
 
-const TilesCard = ({ tile }) => {
-  const {
-    title,
-    description,
-    image,
-    category,
-    price,
-    currency,
-    dimensions,
-    material,
-  } = tile;
+const TilesCard = ({ tile, index }) => {
+  const { title, description, image, category, price, currency, dimensions, material, inStock } = tile;
 
   return (
-    <div className="group bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
-      <div className="relative h-64 w-full overflow-hidden">
-  <div className="absolute top-4 left-4 z-10">
-    <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-blue-600 text-xs font-bold rounded-full shadow-sm border border-blue-50 uppercase tracking-widest">
-      {category}
-    </span>
-  </div>
-
-  <Image
-    src={image}
-    alt={title}
-    fill                          // ✅ width/height এর বদলে fill
-    sizes="(max-width: 768px) 100vw, 400px"
-    className="object-cover"      // ✅ style prop এর বদলে className
-    priority={false}
-  />
-
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-          <button className="bg-white p-3 rounded-full text-slate-900 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 shadow-xl">
-            <FiMaximize size={20} />
-          </button>
+    
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
+      whileHover={{ y: -6 }}
+      className="group flex flex-col bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/60 transition-shadow duration-300 overflow-hidden"
+    >
+      <div className="relative h-48 w-full overflow-hidden bg-slate-50">
+        
+        <div className="absolute top-3 left-3 z-20 flex gap-2">
+          <span className="px-2.5 py-1 bg-white/80 backdrop-blur-md text-blue-600 text-[10px] font-bold rounded-full border border-white/60 uppercase tracking-widest">
+            {category}
+          </span>
+          {!inStock && (
+            <span className="px-2.5 py-1 bg-red-500/90 text-white text-[10px] font-bold rounded-full uppercase tracking-widest">
+              Sold Out
+            </span>
+          )}
         </div>
-      </div>
 
-      {/* Content Section */}
-      <div className="p-6">
-        <div className="flex justify-between items-start mb-3">
-          <h2 className="text-xl font-bold text-slate-800 leading-tight group-hover:text-blue-600 transition-colors">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          sizes="(max-width: 768px) 100vw, 350px"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          priority={index < 4}
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      </div>
+      <div className="p-4 flex flex-col flex-1">
+        
+        <div className="flex justify-between items-start gap-2 mb-2">
+          <h2 className="text-sm font-bold text-slate-800 leading-snug group-hover:text-blue-600 transition-colors line-clamp-1">
             {title}
           </h2>
-          <div className="text-right">
-            <p className="text-2xl font-black text-slate-900 leading-none">
-              <span className="text-sm font-medium text-gray-400 mr-1">
-                {currency}
-              </span>
-              {price}
-            </p>
-          </div>
+          <p className="text-base font-black text-slate-900 whitespace-nowrap shrink-0">
+            <span className="text-[10px] font-medium text-slate-400 mr-0.5">{currency}</span>
+            {price}
+          </p>
         </div>
 
-        <p className="text-gray-500 text-sm line-clamp-2 mb-5 leading-relaxed">
-          {description}
+        <p className="text-slate-400 text-xs line-clamp-1 mb-3 leading-relaxed">
+          {description || `${material} · ${dimensions}`}
         </p>
 
-        {/* Specs Grid */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          <div className="flex items-center gap-2 text-xs font-medium text-slate-600 bg-slate-50 p-2 rounded-lg">
-            <FiMaximize className="text-blue-500" />
+        <div className="flex gap-2 mb-4">
+          <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-500 bg-slate-50 px-2.5 py-1.5 rounded-lg">
+            <FiMaximize size={11} className="text-blue-400" />
             {dimensions}
           </div>
-          <div className="flex items-center gap-2 text-xs font-medium text-slate-600 bg-slate-50 p-2 rounded-lg">
-            <FiLayers className="text-blue-500" />
+          <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-500 bg-slate-50 px-2.5 py-1.5 rounded-lg">
+            <FiLayers size={11} className="text-blue-400" />
             {material}
           </div>
         </div>
 
-        {/* Action Button */}
-        <button className="w-full py-3 bg-slate-900 group-hover:bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95">
-          View Details
-          <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-        </button>
+      <motion.button
+  whileTap={{ scale: 0.97 }}
+  disabled={!inStock}
+  className="mt-auto w-full py-2.5 relative overflow-hidden rounded-xl flex items-center justify-center gap-2 text-sm font-semibold text-white bg-slate-900 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
+>
+  <div className="absolute inset-0 w-0 group-hover:w-full bg-blue-600 transition-all duration-300" />
+  <span className="relative z-10 flex items-center gap-1.5">
+    {inStock ? (
+      <Link href="/all-tiles" className="flex items-center gap-1.5">
+        See More... <FiArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+      </Link>
+    ) : (
+      "Out of Stock"
+    )}
+  </span>
+</motion.button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,5 +1,6 @@
 import Banner from "@/components/Bannar";
 import TilesCards from "@/components/TilesCards";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
    <div>
         <Banner />
         <TilesCards />
+        <WhyChooseUs />
    </div>
   );
 }
