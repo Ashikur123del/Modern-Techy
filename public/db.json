@@ -51,7 +51,7 @@
     "id": "tile_005",
     "title": "Oak Wood Porcelain",
     "description": "Hard-wearing porcelain tiles that perfectly mimic the natural texture and grain of oak wood.",
-    "image": "https://images.unsplash.com/photo-1513161455079-7dc1bc456c4a?q=80&w=1000",
+    "image": "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=1000",
     "category": "Porcelain",
     "price": 62.99,
     "currency": "USD",
@@ -60,7 +60,6 @@
     "inStock": true
   },
   {
-    "id": "tile_010",
     "id": "tile_006",
     "title": "Midnight Slate Stone",
     "description": "Dark, textured slate tiles for a bold, slip-resistant finish in modern outdoor areas.",
@@ -112,7 +111,7 @@
     "id": "tile_010",
     "title": "Hexagon Matte Black",
     "description": "Trendy hexagon-shaped tiles in a matte black finish for a modern and edgy shower floor.",
-    "image": "https://images.unsplash.com/photo-1583335513277-505c87a55422?q=80&w=1000",
+    "image": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000",
     "category": "Ceramic",
     "price": 50.40,
     "currency": "USD",
