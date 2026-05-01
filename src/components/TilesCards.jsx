@@ -39,6 +39,6 @@ const TilesCards = () => {
       </Suspense>
     </div>
   );
-};
+}
 
 export default TilesCards;
