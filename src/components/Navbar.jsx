@@ -57,14 +57,14 @@ const Navbar = () => {
               <div className="flex items-center gap-4">
                 <div className="text-right hidden lg:block">
                   <p className="text-sm font-bold text-slate-800 leading-none">{user.name}</p>
-                  <p className="text-[10px] text-gray-500">{user.email}</p>
                 </div>
                 
                 <div className="relative group">
                    <Image 
-                   src={user?.image ? user.image : userImage.src}
+                    src={user.image || Avatar} 
                     alt="User" 
                     width={40} 
+                    referrerPolicy='no-referrer'
                     height={40} 
                     className="rounded-full border-2 border-blue-100 object-cover cursor-pointer hover:border-blue-600 transition-all"
                   />
@@ -110,22 +110,6 @@ const Navbar = () => {
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-white border-t border-gray-100`}>
         <div className="px-4 pt-4 pb-6 space-y-2 shadow-inner">
           
-    
-          {user && (
-            <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl mb-4">
-               <Image 
-                  src={user?.image ? user.image : userImage.src}
-                  alt="User" 
-                  width={45} 
-                  height={45} 
-                  className="rounded-full border-2 border-blue-200"
-                />
-                <div>
-                  <p className="font-bold text-slate-800">{user.name}</p>
-                  <p className="text-xs text-gray-500">{user.email}</p>
-                </div>
-            </div>
-          )}
 
           <div className="flex flex-col space-y-3 border-b border-gray-50 pb-4 text-gray-600">
             <NavLink className="font-bold" href='/' onClick={() => setIsOpen(false)}>Home</NavLink>
