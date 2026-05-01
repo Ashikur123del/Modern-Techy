@@ -1,5 +1,5 @@
 import AllTilesHero from "@/components/AllTilesHero";
-import Card from "@/components/Card"; // পাথ ঠিক করে নিন
+import Card from "@/components/Card"; 
 
 const AllTiles = async () => {
   const res = await fetch('https://modern-techy.vercel.app/db.json', { cache: 'no-store'});
