@@ -8,6 +8,9 @@ import { HiOutlineSquares2X2 } from "react-icons/hi2";
 import NavLink from './NavLinks';
 import { authClient } from '@/lib/auth-client';
 import { Avatar } from '@heroui/react';
+import { ThemeSwitch } from './ThemeSwitch';
+
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -94,8 +97,9 @@ const Navbar = () => {
                 </Link>
               </>
             )}
+              <ThemeSwitch />
           </div>
-
+          
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -143,6 +147,7 @@ const Navbar = () => {
                 </Link>
               </>
             )}
+           
           </div>
         </div>
       </div>
