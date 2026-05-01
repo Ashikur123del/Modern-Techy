@@ -39,10 +39,10 @@ const Footer = () => {
                 <FiMapPin className="text-blue-500" /> Savar, Dhaka, Bangladesh
               </li>
               <li className="flex items-center gap-3">
-                <FiPhone className="text-blue-500" /> +880 1234 567 890
+                <FiPhone className="text-blue-500" /> +880 1317153621
               </li>
               <li className="flex items-center gap-3">
-                <FiMail className="text-blue-500" /> hello@luminatiles.com
+                <FiMail className="text-blue-500" /> asikk2925@gmai.com
               </li>
             </ul>
           </div>
@@ -69,10 +69,11 @@ const Footer = () => {
             <a href="#" className="hover:underline">Privacy Policy</a>
             <a href="#" className="hover:underline">Terms of Service</a>
           </div>
-        </div>
+        </div> 
       </div>
     </footer>
   );
 };
 
 export default Footer;
+

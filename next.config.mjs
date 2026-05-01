@@ -4,10 +4,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**', // সব ডোমেইন এলাউ করার জন্য
+        hostname: '**', 
       },
     ],
   },
 };
 
-export default nextConfig; // .mjs ফাইলে এটাই সঠিক
+export default nextConfig; 
