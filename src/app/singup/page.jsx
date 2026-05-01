@@ -15,7 +15,6 @@ const SignUpPage = () => {
 
   const handleRegister = async (data) => {
     const { name, photoUrl, email, password } = data;
-
     const id = toast.loading("Creating your account...");
 
     try {
@@ -37,7 +36,7 @@ const SignUpPage = () => {
       }
 
       toast.update(id, {
-        render: "Account created successfully! 🎉",
+        render: "Account created successfully! ",
         type: "success",
         isLoading: false,
         autoClose: 3000,
@@ -57,71 +56,61 @@ const SignUpPage = () => {
   return (
     <div className="container mx-auto min-h-[80vh] flex items-center justify-center p-4 sm:p-10 bg-slate-100">
       <div className="w-full max-w-md">
-        <div className="bg-white px-6 py-10 rounded-lg shadow-lg border">
+        <div className="bg-white px-6 py-10 rounded-xl shadow-lg border">
           <h1 className="text-2xl font-bold text-center mb-6">
             Register Your Account
           </h1>
 
           <form onSubmit={handleSubmit(handleRegister)}>
             <fieldset className="space-y-4">
-
-              {/* Name */}
               <div>
-                <label className="font-medium">Name</label>
+                <label className="font-medium text-slate-700">Name</label>
                 <input
                   type="text"
                   {...register("name", { required: "Name is required" })}
-                  className="w-full border px-3 py-2 rounded mt-1"
-                  placeholder="Name"
+                  className="w-full border px-3 py-2 rounded-lg mt-1 focus:ring-2 focus:ring-blue-500 outline-none"
+                  placeholder="Full Name"
                 />
                 {errors.name && (
-                  <p className="text-red-500 text-sm">{errors.name.message}</p>
+                  <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
                 )}
               </div>
 
-              {/* Photo */}
               <div>
-                <label className="font-medium">Photo URL</label>
+                <label className="font-medium text-slate-700">Photo URL</label>
                 <input
                   type="text"
                   {...register("photoUrl", {
                     required: "Photo URL is required",
                   })}
-                  className="w-full border px-3 py-2 rounded mt-1"
-                  placeholder="Photo URL"
+                  className="w-full border px-3 py-2 rounded-lg mt-1 focus:ring-2 focus:ring-blue-500 outline-none"
+                  placeholder="https://example.com/photo.jpg"
                 />
                 {errors.photoUrl && (
-                  <p className="text-red-500 text-sm">
-                    {errors.photoUrl.message}
-                  </p>
+                  <p className="text-red-500 text-sm mt-1">{errors.photoUrl.message}</p>
                 )}
               </div>
-
-              {/* Email */}
               <div>
-                <label className="font-medium">Email</label>
+                <label className="font-medium text-slate-700">Email Address</label>
                 <input
                   type="email"
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
-                      value: /^\S+@\S+\.\S+$/,
-                      message: "Invalid email",
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
                     },
                   })}
-                  className="w-full border px-3 py-2 rounded mt-1"
-                  placeholder="Email"
+                  className="w-full border px-3 py-2 rounded-lg mt-1 focus:ring-2 focus:ring-blue-500 outline-none"
+                  placeholder="email@example.com"
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-sm">
-                    {errors.email.message}
-                  </p>
+                  <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
                 )}
               </div>
 
-              {/* Password */}
               <div>
-                <label className="font-medium">Password</label>
+                <label className="font-medium text-slate-700">Password</label>
                 <input
                   type="password"
                   {...register("password", {
@@ -131,28 +120,27 @@ const SignUpPage = () => {
                       message: "Minimum 6 characters",
                     },
                   })}
-                  className="w-full border px-3 py-2 rounded mt-1"
-                  placeholder="Password"
+                  className="w-full border px-3 py-2 rounded-lg mt-1 focus:ring-2 focus:ring-blue-500 outline-none"
+                  placeholder="••••••••"
                 />
                 {errors.password && (
-                  <p className="text-red-500 text-sm">
-                    {errors.password.message}
-                  </p>
+                  <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
                 )}
               </div>
 
               <button
+                type="submit" 
                 disabled={isSubmitting}
-                className="w-full bg-blue-600 text-white py-2 rounded mt-2"
+                className="w-full bg-blue-600 text-white py-2.5 rounded-lg mt-2 font-bold hover:bg-blue-700 transition-all active:scale-95 disabled:opacity-70"
               >
                 {isSubmitting ? "Creating..." : "Register"}
               </button>
             </fieldset>
           </form>
 
-          <p className="mt-6 text-center text-sm">
+          <p className="mt-8 text-center text-sm text-gray-600">
             Already have an account?{" "}
-            <Link href="/singin" className="text-blue-600 hover:underline">
+            <Link href="/signin" className="text-blue-600 font-bold hover:underline">
               Login
             </Link>
           </p>

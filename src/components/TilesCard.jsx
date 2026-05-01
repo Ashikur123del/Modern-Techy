@@ -7,9 +7,9 @@ import { FiArrowRight, FiMaximize, FiLayers } from "react-icons/fi";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
-const TilesCard = ({ tile, index }) => {
+const TilesCard = ({ tile, index = 0 }) => {
   const {
-    id, 
+    id,
     title,
     description,
     image,
@@ -21,13 +21,14 @@ const TilesCard = ({ tile, index }) => {
     inStock,
   } = tile;
 
-
-  const handleNotify = () => {
-    toast.success(`Checking details for ${title}...`, {
-      position: "top-right",
-      autoClose: 2000,
-      theme: "colored",
-    });
+  const handleNotify = (e) => {
+    if (!inStock) {
+      toast.info(`Sorry, ${title} is currently unavailable.`, {
+        position: "top-right",
+        autoClose: 2000,
+        theme: "colored",
+      });
+    }
   };
 
   return (
@@ -38,7 +39,6 @@ const TilesCard = ({ tile, index }) => {
       whileHover={{ y: -6 }}
       className="group flex flex-col bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/60 transition-shadow duration-300 overflow-hidden"
     >
-
       <div className="relative h-48 w-full overflow-hidden bg-slate-50">
         <div className="absolute top-3 left-3 z-20 flex gap-2">
           <span className="px-2.5 py-1 bg-white/80 backdrop-blur-md text-blue-600 text-[10px] font-bold rounded-full border border-white/60 uppercase tracking-widest">
@@ -67,10 +67,12 @@ const TilesCard = ({ tile, index }) => {
           <h2 className="text-sm font-bold text-slate-800 line-clamp-1 group-hover:text-blue-600 transition-colors">
             {title}
           </h2>
-          <p className="text-base font-black text-slate-900 shrink-0">
-            <span className="text-[10px] font-medium text-slate-400 mr-0.5">{currency}</span>
+          <div className="text-base font-black text-slate-900 shrink-0">
+            <span className="text-[10px] font-medium text-slate-400 mr-0.5">
+              {currency}
+            </span>
             {price}
-          </p>
+          </div>
         </div>
 
         <p className="text-slate-400 text-xs line-clamp-1 mb-3">
@@ -86,28 +88,30 @@ const TilesCard = ({ tile, index }) => {
           </div>
         </div>
 
-        <motion.button
-          whileTap={{ scale: 0.97 }}
-          onClick={handleNotify} 
-          disabled={!inStock}
-          className="mt-auto w-full py-2.5 relative overflow-hidden rounded-xl flex items-center justify-center gap-2 text-sm font-semibold text-white bg-slate-900 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors group/btn"
-        >
-          <div className="absolute inset-0 w-0 group-hover/btn:w-full bg-blue-600 transition-all duration-300" />
-          <span className="relative z-10 flex items-center gap-1.5">
-            {inStock ? (
-    
-              <Link href="/all-tiles" className="flex items-center gap-1.5">
-                See More...
+        {inStock ? (
+          <Link href={`/all-tiles/${id}`} passHref>
+            <motion.div
+              whileTap={{ scale: 0.97 }}
+              className="mt-auto w-full py-2.5 relative overflow-hidden rounded-xl flex items-center justify-center gap-2 text-sm font-semibold text-white bg-slate-900 transition-colors group/btn cursor-pointer"
+            >
+              <div className="absolute inset-0 w-0 group-hover/btn:w-full bg-blue-600 transition-all duration-300" />
+              <span className="relative z-10 flex items-center gap-1.5">
+                See Details
                 <FiArrowRight
                   size={14}
                   className="group-hover/btn:translate-x-1 transition-transform"
                 />
-              </Link>
-            ) : (
-              "Out of Stock"
-            )}
-          </span>
-        </motion.button>
+              </span>
+            </motion.div>
+          </Link>
+        ) : (
+          <button
+            onClick={handleNotify}
+            className="mt-auto w-full py-2.5 rounded-xl flex items-center justify-center gap-2 text-sm font-semibold text-white bg-slate-300 cursor-not-allowed"
+          >
+            Out of Stock
+          </button>
+        )}
       </div>
     </motion.div>
   );

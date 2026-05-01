@@ -3,20 +3,39 @@ import Link from "next/link";
 import { FiArrowLeft, FiCheckCircle, FiXCircle, FiPackage, FiMaximize2 } from "react-icons/fi";
 
 const TileDetails = async ({ params }) => {
-  const { id } = await params;
-  const res = await fetch(`https://modern-techy.vercel.app/db.json`, { cache: 'no-store' });
-  if (!res.ok) return <div className="text-center mt-20">Failed to load data.</div>;
-  const data = await res.json(); 
-  const tile = data.find((item) => item.id.toString() === id);
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
 
+  let data = [];
+  try {
+    const res = await fetch(`https://modern-techy.vercel.app/db.json`, { 
+      next: { revalidate: 3600 } 
+    });
+    
+    if (!res.ok) throw new Error("Failed to fetch");
+    data = await res.json();
+  } catch (error) {
+    return (
+      <div className="text-center mt-20 text-red-500 font-bold">
+        Failed to load data. Please try again later.
+      </div>
+    );
+  }
+  const tile = data.find((item) => item.id.toString() === id);
   if (!tile) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
         <h2 className="text-2xl font-bold text-red-500">Tile not found!</h2>
-        <Link href="/all-tiles" className="mt-4 text-blue-600 underline">Back to Shop</Link>
+        <Link href="/all-tiles" className="mt-4 text-blue-600 underline">
+          Back to Shop
+        </Link>
       </div>
     );
   }
+
+  const relatedTiles = data
+    .filter((item) => item.id.toString() !== id)
+    .slice(0, 5);
 
   return (
     <div className="bg-slate-50 min-h-screen pb-20">
@@ -30,13 +49,14 @@ const TileDetails = async ({ params }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-white p-4 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
           
           <div className="lg:col-span-7">
-            <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden rounded-3xl group">
+            <div className="relative h-[350px] md:h-[550px] w-full overflow-hidden rounded-3xl group bg-slate-100">
               <Image 
                 src={tile.image} 
                 alt={tile.title} 
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700" 
                 priority
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute top-5 right-5">
                 <span className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md shadow-lg ${tile.inStock ? 'bg-green-500/90 text-white' : 'bg-red-500/90 text-white'}`}>
@@ -53,7 +73,7 @@ const TileDetails = async ({ params }) => {
                 <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-lg text-xs font-bold uppercase tracking-widest mb-3">
                   {tile.category}
                 </span>
-                <h1 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">
+                <h1 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">
                   {tile.title}
                 </h1>
               </div>
@@ -74,7 +94,7 @@ const TileDetails = async ({ params }) => {
                   </div>
                   <div>
                     <p className="text-slate-400 text-[10px] uppercase font-bold tracking-tighter">Material</p>
-                    <p className="text-slate-900 font-bold">{tile.material}</p>
+                    <p className="text-slate-900 font-bold">{tile.material || "N/A"}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -83,15 +103,14 @@ const TileDetails = async ({ params }) => {
                   </div>
                   <div>
                     <p className="text-slate-400 text-[10px] uppercase font-bold tracking-tighter">Dimensions</p>
-                    <p className="text-slate-900 font-bold">{tile.dimensions}</p>
+                    <p className="text-slate-900 font-bold">{tile.dimensions || "Standard"}</p>
                   </div>
                 </div>
               </div>
 
-        
               <button 
                 disabled={!tile.inStock}
-                className="w-full py-5 bg-slate-900 text-white rounded-2xl font-bold text-lg hover:bg-blue-600 disabled:bg-slate-200 disabled:text-slate-400 transition-all active:scale-[0.98] shadow-xl shadow-blue-200"
+                className="w-full py-5 bg-slate-900 text-white rounded-2xl font-bold text-lg hover:bg-blue-600 disabled:bg-slate-200 disabled:text-slate-400 transition-all active:scale-[0.98] shadow-xl shadow-blue-200/50"
               >
                 {tile.inStock ? 'Add to Quote' : 'Currently Unavailable'}
               </button>
@@ -99,6 +118,7 @@ const TileDetails = async ({ params }) => {
           </div>
         </div>
 
+        {/* Related Products Section */}
         <div className="mt-20">
           <div className="flex justify-between items-end mb-10">
             <div>
@@ -108,11 +128,16 @@ const TileDetails = async ({ params }) => {
             <Link href="/all-tiles" className="text-blue-600 font-bold hover:underline">View All</Link>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {data.slice(0, 5).map((item) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            {relatedTiles.map((item) => (
               <Link href={`/all-tiles/${item.id}`} key={item.id} className="group">
-                <div className="relative h-40 rounded-2xl overflow-hidden mb-2">
-                  <Image src={item.image} alt={item.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="relative h-48 rounded-2xl overflow-hidden mb-3 bg-slate-200">
+                  <Image 
+                    src={item.image} 
+                    alt={item.title} 
+                    fill 
+                    className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                  />
                 </div>
                 <p className="text-sm font-bold text-slate-800 truncate">{item.title}</p>
                 <p className="text-xs text-blue-600 font-bold">{item.currency} {item.price}</p>
